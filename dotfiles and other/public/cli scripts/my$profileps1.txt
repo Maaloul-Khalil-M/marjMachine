@@ -1,0 +1,90 @@
+# ── Environment ───────────────────────────────────────────────────────────────
+$env:YAZI_FILE_ONE = "C:\Program Files\Git\usr\bin\file.exe"
+
+# ── Oh My Posh (includes git prompt — no posh-git needed) ────────────────────
+oh-my-posh init pwsh --config "$HOME\.posh-themes\jandedobbeleer.omp.json" | Invoke-Expression
+
+# ── Modules ───────────────────────────────────────────────────────────────────
+Import-Module -Name Terminal-Icons
+
+# ── PSReadLine (history + plugin autocomplete) ────────────────────────────────
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+Set-PSReadLineOption -PredictionViewStyle ListView
+
+# ── zoxide (smarter cd) ───────────────────────────────────────────────────────
+Invoke-Expression (& { zoxide init powershell | Out-String })
+
+# ── Yazi shell wrapper (cd on quit) ───────────────────────────────────────────
+function y {
+    $tmp = (New-TemporaryFile).FullName
+    yazi.exe $args --cwd-file="$tmp"
+    $cwd = Get-Content -Path $tmp -Encoding UTF8
+    if ($cwd -and $cwd -ne $PWD.Path -and (Test-Path -LiteralPath $cwd -PathType Container)) {
+        Set-Location -LiteralPath (Resolve-Path -LiteralPath $cwd).Path
+    }
+    Remove-Item -Path $tmp
+}
+
+# ── Aliases ───────────────────────────────────────────────────────────────────
+Set-Alias e    explorer
+Set-Alias note "C:\Program Files\Notepad++\notepad++.exe"
+Set-Alias lg   lazygit
+
+# ── lenvid ────────────────────────────────────────────────────────────────────
+function lenvid {
+    param ([string]$Path = ".")
+    $scriptPath = "C:\Scripts\lenvid.py"
+    if (-not (Test-Path $scriptPath)) { Write-Error "Script not found: $scriptPath"; return }
+    if (-not (Get-Command python -ErrorAction SilentlyContinue)) { Write-Error "Python not found."; return }
+    python $scriptPath $Path
+}
+
+# ── srttotxt ──────────────────────────────────────────────────────────────────
+# Convert .srt/.vtt files or YouTube URLs to clean .txt in C:\Subtitles
+#
+# Usage:
+#   srttotxt "https://youtube.com/..."           # YouTube, English
+#   srttotxt "https://youtube.com/..." -Lang fr  # YouTube, French
+#   srttotxt .\lecture.srt                       # local file
+#   srttotxt .\subs\                             # whole folder
+#   srttotxt .\urls.txt -Batch                   # batch from file
+#   srttotxt "https://..." -Cookies              # age-restricted (Chrome)
+#   srttotxt "https://..." -Paragraph            # single-paragraph output
+#   srttotxt "https://..." -Open                 # open C:\Subtitles after
+# ─────────────────────────────────────────────────────────────────────────────
+function srttotxt {
+    param (
+        [string]$Path      = ".",
+        [string]$Lang      = "en",
+        [switch]$Paragraph,
+        [switch]$Cookies,
+        [switch]$Batch,
+        [switch]$Open
+    )
+    $scriptPath = "C:\Scripts\srttotxt.py"
+    if (-not (Test-Path $scriptPath)) { Write-Error "Script not found: $scriptPath"; return }
+    if (-not (Get-Command python -ErrorAction SilentlyContinue)) { Write-Error "Python not found."; return }
+    $pyArgs = @($scriptPath, $Path, "-lang", $Lang)
+    if ($Paragraph) { $pyArgs += "-paragraph" }
+    if ($Cookies)   { $pyArgs += "-cookies"   }
+    if ($Batch)     { $pyArgs += "-batch"     }
+    if ($Open)      { $pyArgs += "-open"      }
+    python @pyArgs
+}
+
+# ── wifi ──────────────────────────────────────────────────────────────────────
+function wifi {
+    param (
+        [string]$Name = "",
+        [switch]$QR
+    )
+    $scriptPath = "C:\Scripts\wifi_passwords.py"
+    if (-not (Test-Path $scriptPath))           { Write-Error "Script not found: $scriptPath"; return }
+    if (-not (Get-Command python -ErrorAction SilentlyContinue)) { Write-Error "Python not found."; return }
+
+    $args = @()
+    if ($Name) { $args += "--name", $Name }
+    if ($QR)   { $args += "--qr" }
+
+    python $scriptPath @args
+}

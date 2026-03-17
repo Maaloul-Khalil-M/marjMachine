@@ -1,0 +1,32 @@
+{
+  "periods": [
+    {
+      "name": "Sleep",
+      "icon": "💤",
+      "start": 1,
+      "end": 8,
+      "description": "Rest & Recovery"
+    },
+    {
+      "name": "Morning",
+      "icon": "🌻",
+      "start": 8,
+      "end": 14,
+      "description": "Peak Focus Time"
+    },
+    {
+      "name": "Afternoon",
+      "icon": "🪴",
+      "start": 14,
+      "end": 19,
+      "description": "Steady Energy"
+    },
+    {
+      "name": "Night",
+      "icon": "🥀",
+      "start": 19,
+      "end": 1,
+      "description": "Wind Down"
+    }
+  ]
+}

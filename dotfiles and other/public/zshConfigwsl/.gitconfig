@@ -1,0 +1,7 @@
+[user]
+	name = Maaloul Khalil M
+	email = maaloul.mk5@gmail.com
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false

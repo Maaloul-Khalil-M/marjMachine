@@ -1,0 +1,392 @@
+{
+  // ... your existing snippets ...
+
+  "React Component": {
+    "prefix": "rfc",
+    "body": [
+      "function ${1:ComponentName}() {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t${0}",
+      "\t\t</div>",
+      "\t);",
+      "}"
+    ],
+    "description": "React functional component"
+  },
+  "Export Arrow Component": {
+    "prefix": "eac",
+    "body": [
+      "export const ${1:MyComponent} = () => <div>${2:Hello World}</div>;"
+    ],
+    "description": "Export const React arrow component"
+  },
+  "React Component with Props": {
+    "prefix": "rfcp",
+    "body": [
+      "function ${1:ComponentName}({ ${2:props} }) {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t${0}",
+      "\t\t</div>",
+      "\t);",
+      "}"
+    ],
+    "description": "React functional component with props"
+  },
+
+  "React Arrow Component": {
+    "prefix": "rafc",
+    "body": [
+      "const ${1:ComponentName} = () => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t${0}",
+      "\t\t</div>",
+      "\t);",
+      "};"
+    ],
+    "description": "React arrow function component"
+  },
+
+  "useState": {
+    "prefix": "us",
+    "body": [
+      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initialValue});"
+    ],
+    "description": "useState hook"
+  },
+
+  "useEffect": {
+    "prefix": "ue",
+    "body": [
+      "useEffect(() => {",
+      "\t${0}",
+      "}, [${1}]);"
+    ],
+    "description": "useEffect hook"
+  },
+
+  "useEffect with Cleanup": {
+    "prefix": "uec",
+    "body": [
+      "useEffect(() => {",
+      "\t${1}",
+      "",
+      "\treturn () => {",
+      "\t\t${0}",
+      "\t};",
+      "}, [${2}]);"
+    ],
+    "description": "useEffect with cleanup"
+  },
+
+  "useContext": {
+    "prefix": "uctx",
+    "body": [
+      "const ${1:value} = useContext(${2:Context});"
+    ],
+    "description": "useContext hook"
+  },
+
+  "useRef": {
+    "prefix": "uref",
+    "body": [
+      "const ${1:ref} = useRef(${2:null});"
+    ],
+    "description": "useRef hook"
+  },
+
+  "useMemo": {
+    "prefix": "umemo",
+    "body": [
+      "const ${1:memoized} = useMemo(() => {",
+      "\treturn ${2};",
+      "}, [${3}]);"
+    ],
+    "description": "useMemo hook"
+  },
+
+  "useCallback": {
+    "prefix": "ucb",
+    "body": [
+      "const ${1:callback} = useCallback(() => {",
+      "\t${0}",
+      "}, [${2}]);"
+    ],
+    "description": "useCallback hook"
+  },
+
+  "useReducer": {
+    "prefix": "ured",
+    "body": [
+      "const [${1:state}, ${2:dispatch}] = useReducer(${3:reducer}, ${4:initialState});"
+    ],
+    "description": "useReducer hook"
+  },
+
+  "JSX Map": {
+    "prefix": "jmap",
+    "body": [
+      "{${1:array}.map((${2:item}) => (",
+      "\t<${3:div} key={${2:item}.${4:id}}>",
+      "\t\t${0}",
+      "\t</${3:div}>",
+      "))}"
+    ],
+    "description": "JSX map iteration"
+  },
+
+  "JSX Conditional": {
+    "prefix": "jif",
+    "body": [
+      "{${1:condition} && (",
+      "\t${0}",
+      ")}"
+    ],
+    "description": "JSX conditional rendering"
+  },
+
+  "JSX Ternary": {
+    "prefix": "jtern",
+    "body": [
+      "{${1:condition} ? (",
+      "\t${2}",
+      ") : (",
+      "\t${0}",
+      ")}"
+    ],
+    "description": "JSX ternary operator"
+  },
+
+  "Export Default Component": {
+    "prefix": "expdc",
+    "body": [
+      "export default ${1:ComponentName};"
+    ],
+    "description": "Export default component"
+  },
+
+  "React Event Handler": {
+    "prefix": "reh",
+    "body": [
+      "const handle${1:Click} = (${2:e}) => {",
+      "\t${0}",
+      "};"
+    ],
+    "description": "React event handler"
+  },
+
+  "Create Context": {
+    "prefix": "rctx",
+    "body": [
+      "const ${1:Context} = createContext(${2:defaultValue});"
+    ],
+    "description": "Create React context"
+  },
+
+  "Context Provider": {
+    "prefix": "rprov",
+    "body": [
+      "function ${1:Provider}({ children }) {",
+      "\tconst [${2:state}, set${2/(.*)/${1:/capitalize}/}] = useState(${3:initialValue});",
+      "",
+      "\treturn (",
+      "\t\t<${4:Context}.Provider value={{ ${2:state}, set${2/(.*)/${1:/capitalize}/} }}>",
+      "\t\t\t{children}",
+      "\t\t</${4:Context}.Provider>",
+      "\t);",
+      "}"
+    ],
+    "description": "Context provider component"
+  },
+
+  "Import Default": {
+    "prefix": "imd",
+    "body": [
+      "import ${1:module} from '${2:path}';"
+    ],
+    "description": "Import default"
+  },
+
+  "Import Named": {
+    "prefix": "imn",
+    "body": [
+      "import { ${1:module} } from '${2:path}';"
+    ],
+    "description": "Import named"
+  },
+
+  "Import Multiple Named": {
+    "prefix": "immn",
+    "body": [
+      "import { ${1:module1}, ${2:module2} } from '${3:path}';"
+    ],
+    "description": "Import multiple named"
+  },
+
+  "Import Default and Named": {
+    "prefix": "imdn",
+    "body": [
+      "import ${1:default}, { ${2:named} } from '${3:path}';"
+    ],
+    "description": "Import default and named"
+  },
+
+  "Import Everything As": {
+    "prefix": "ima",
+    "body": [
+      "import * as ${1:name} from '${2:path}';"
+    ],
+    "description": "Import everything as"
+  },
+
+  "Import CSS/SCSS": {
+    "prefix": "imcss",
+    "body": [
+      "import './${1:styles}.${2|css,scss|}';"
+    ],
+    "description": "Import CSS or SCSS file"
+  },
+
+  "Import Component": {
+    "prefix": "imc",
+    "body": [
+      "import ${1:Component} from './${2:components}/${1:Component}';"
+    ],
+    "description": "Import React component"
+  },
+
+  "Import React": {
+    "prefix": "imr",
+    "body": [
+      "import React from 'react';"
+    ],
+    "description": "Import React"
+  },
+
+  "Import React DOM": {
+    "prefix": "imrd",
+    "body": [
+      "import ReactDOM from 'react-dom';"
+    ],
+    "description": "Import ReactDOM"
+  },
+
+  "Import React with Hooks": {
+    "prefix": "imrh",
+    "body": [
+      "import { ${1:useState, useEffect} } from 'react';"
+    ],
+    "description": "Import React hooks"
+  },
+
+  "Import useState": {
+    "prefix": "imus",
+    "body": [
+      "import { useState } from 'react';"
+    ],
+    "description": "Import useState"
+  },
+
+  "Import useEffect": {
+    "prefix": "imue",
+    "body": [
+      "import { useEffect } from 'react';"
+    ],
+    "description": "Import useEffect"
+  },
+
+  "Import PropTypes": {
+    "prefix": "impt",
+    "body": [
+      "import PropTypes from 'prop-types';"
+    ],
+    "description": "Import PropTypes"
+  },
+
+  "Export Default": {
+    "prefix": "expd",
+    "body": [
+      "export default ${1:name};"
+    ],
+    "description": "Export default"
+  },
+
+  "Export Named": {
+    "prefix": "expn",
+    "body": [
+      "export { ${1:name} };"
+    ],
+    "description": "Export named"
+  },
+
+  "Export Multiple Named": {
+    "prefix": "expmn",
+    "body": [
+      "export { ${1:name1}, ${2:name2} };"
+    ],
+    "description": "Export multiple named"
+  },
+
+  "Export As": {
+    "prefix": "expas",
+    "body": [
+      "export { ${1:original} as ${2:alias} };"
+    ],
+    "description": "Export with alias"
+  },
+
+  "Export All From": {
+    "prefix": "expaf",
+    "body": [
+      "export * from '${1:path}';"
+    ],
+    "description": "Export all from module"
+  },
+
+  "Export Named From": {
+    "prefix": "expnf",
+    "body": [
+      "export { ${1:name} } from '${2:path}';"
+    ],
+    "description": "Export named from module"
+  },
+
+  "Export Default Function": {
+    "prefix": "expdf",
+    "body": [
+      "export default function ${1:name}(${2:params}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Export default function"
+  },
+
+  "Export Const": {
+    "prefix": "expc",
+    "body": [
+      "export const ${1:name} = ${2:value};"
+    ],
+    "description": "Export const"
+  },
+
+  "Import and Export": {
+    "prefix": "imexp",
+    "body": [
+      "import ${1:name} from '${2:path}';",
+      "",
+      "export default ${1:name};"
+    ],
+    "description": "Import and re-export default"
+  },
+
+  "Barrel Export": {
+    "prefix": "barrel",
+    "body": [
+      "export { default as ${1:Name} } from './${1:Name}';",
+      "export { default as ${2:Name2} } from './${2:Name2}';"
+    ],
+    "description": "Barrel export pattern"
+  }
+}

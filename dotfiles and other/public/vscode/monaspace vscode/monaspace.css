@@ -1,0 +1,346 @@
+/*
+╔══════════════════════════════════════════════════════════════════════════╗
+║          MONASPACE MULTI-VOICE — GITHUB DARK DEFAULT                    ║
+║          Direct MTK class targeting · v1.301 · JS + PHP                 ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+THEME: GitHub Dark Default (primer/github-vscode-theme)
+  Extension ID: GitHub.github-vscode-theme
+  Variant:      "GitHub Dark Default"  ← NOT "GitHub Dark" (legacy)
+
+HOW MTK CLASSES WORK IN THIS THEME
+─────────────────────────────────────────────────────────────────────────
+  VS Code renders each syntax token as:
+    <span class="mtk1">someIdentifier</span>
+
+  The class number is assigned based on the token's COLOR.
+  Every unique foreground color in the theme gets its own mtk number.
+  The numbers are assigned in order of first appearance during rendering.
+
+  GitHub Dark Default uses Primer's color system. The mapping below was
+  built from the theme source at primer/github-vscode-theme and verified
+  against real rendering. If something looks off after applying, use:
+    Help → Toggle Developer Tools → Inspector → click the token
+
+GITHUB DARK DEFAULT — FULL COLOR → TOKEN MAP
+─────────────────────────────────────────────────────────────────────────
+  #8b949e  → Comments                (gray, muted)
+  #ff7b72  → Keywords: control flow  (red: if, for, while, return, break)
+  #f47067  → Keywords: operators     (softer red: delete, typeof, void, in)
+  #79c0ff  → Variables, identifiers  (blue: most names)
+  #a5d6ff  → Strings                 (light blue)
+  #ffa657  → Constants, numbers      (orange: 42, true, false, null, NaN)
+  #d2a8ff  → Function names          (purple: function declarations/calls)
+  #7ee787  → Strings (alt/regex)     (green: regex literals, template tags)
+  #e3b341  → Types, class names      (gold: class Foo, interface Bar)
+  #79c0ff  → Parameters, props       (same blue as identifiers)
+  #6e7681  → Punctuation             (dark gray: ; , . { } [ ] ( ))
+  #c9d1d9  → Plain text, operators   (near-white: + - * / = default text)
+
+VOICE ASSIGNMENT RATIONALE
+─────────────────────────────────────────────────────────────────────────
+  NEON    → Identifiers, variables, parameters, plain text
+            Neon's clean neutrality matches GitHub Dark's blue identifiers.
+            It is what your eye should rest on most of the time.
+
+  ARGON   → Strings (light blue, green/regex)
+            Humanist letterforms make string content feel like data/prose,
+            not code. The warmth of Argon differentiates it from Neon
+            without competing for attention.
+
+  XENON   → Keywords: control flow (red: if/for/return/class/function)
+            Slab serif serifs give control flow keywords physical weight
+            that matches their importance to code structure. You scan for
+            these landmarks — they should feel substantial.
+
+  KRYPTON → Numbers, constants, punctuation, operators
+            Mechanical precision for the pure-logic glyphs: braces, pipes,
+            numbers. These are structural scaffolding. Krypton feels like
+            a machine drew them — which is right.
+
+  RADON   → Comments
+            Handwritten, italic, lighter weight. Looks like a margin note.
+            At a glance, impossible to mistake for executable code.
+
+NOTE ON WEIGHT TUNING
+─────────────────────────────────────────────────────────────────────────
+  Each voice uses font-variation-settings to tune weight independently.
+  The base 'wght' in settings.json applies to Neon only (the base font).
+  Everything below is calibrated so mixed lines stay optically balanced:
+  no one voice shouts over the others.
+
+AFTER CHANGES: always use
+  Ctrl+Shift+P → "Reload Custom CSS and JS"
+  (not just "Reload Window")
+*/
+
+/* ════════════════════════════════════════════════════════
+  BASE RESET
+  Tell VS Code to stop optimizing for monospace — required
+  for multi-family injection to render without spacing bugs
+   ════════════════════════════════════════════════════════ */
+.monaco-editor {
+  font-feature-settings:
+    "calt" 1,
+      "liga" 1;
+}
+
+/* ════════════════════════════════════════════════════════
+  1. COMMENTS → RADON
+  Color in theme: #8b949e (muted gray)
+  Handwritten, italic, lighter weight.
+  Reads as a margin note. Can never be mistaken for code.
+   ════════════════════════════════════════════════════════ */
+.mtk3 {
+  font-family: "Monaspace Radon Var", monospace !important;
+  font-style: italic !important;
+  font-variation-settings: "wght" 280 !important;
+  /* Lighter than everything else — comments recede visually.
+     Radon's expressive strokes at 280 feel like pencil notes. */
+  font-size: 0.965em;
+  /* Radon's cap-height is optically taller than Neon at the same em.
+     0.965em keeps comment lines from feeling taller than code lines. */
+  letter-spacing: 0.012em;
+  /* Radon's irregular stroke widths benefit from a hair of extra tracking */
+}
+
+/* ════════════════════════════════════════════════════════
+  2. STRINGS → ARGON
+  Color in theme: #a5d6ff (light blue) and #7ee787 (green/regex)
+  Humanist, warmer. String content reads like prose, not logic.
+   ════════════════════════════════════════════════════════ */
+
+/* Primary strings: 'quoted', "double", `backtick` content */
+.mtk6 {
+  font-family: "Monaspace Argon Var", monospace !important;
+  font-variation-settings: "wght" 380 !important;
+  /* Slightly heavier than Neon — strings should be readable without hunting */
+}
+
+/* String punctuation: the quote marks themselves */
+.mtk6 + .mtk6,
+.view-line .mtk6:first-child {
+  font-family: "Monaspace Argon Var", monospace !important;
+}
+
+/* Regex literals and template tag strings (#7ee787 green) */
+.mtk13 {
+  font-family: "Monaspace Argon Var", monospace !important;
+  font-variation-settings: "wght" 380 !important;
+}
+
+/* Template literal expressions inside ${...} stay Neon — they're code,
+   not string content. The surrounding backtick string is Argon. */
+
+/* ════════════════════════════════════════════════════════
+  3. KEYWORDS (CONTROL FLOW) → XENON
+  Color in theme: #ff7b72 (red)
+  Tokens: if else for while do return break continue switch case
+        function class const let var import export extends
+        new this super async await try catch throw
+  Slab serif authority. These are the load-bearing walls of code.
+   ════════════════════════════════════════════════════════ */
+.mtk5 {
+  font-family: "Monaspace Xenon Var", monospace !important;
+  font-variation-settings: "wght" 500 !important;
+  /* Medium weight on Xenon's slab serifs = structural authority.
+     600+ is too heavy; 400 looks like plain Xenon. 500 is the sweet spot. */
+  letter-spacing: -0.012em;
+  /* Xenon's serifs add optical width. Slight negative tracking compensates
+     so keywords don't consume more horizontal space than their Neon neighbors. */
+}
+
+/* Storage keywords: var, let, const, function, class, async
+   GitHub Dark separates these from control keywords — same voice, same weight */
+.mtk8 {
+  font-family: "Monaspace Xenon Var", monospace !important;
+  font-variation-settings: "wght" 500 !important;
+  letter-spacing: -0.012em;
+}
+
+/* ════════════════════════════════════════════════════════
+  4. FUNCTION NAMES → NEON (elevated weight)
+  Color in theme: #d2a8ff (purple)
+  Keep Neon for function names — they're identifiers, not structure.
+  But bump the weight so they read as the most important identifiers.
+   ════════════════════════════════════════════════════════ */
+.mtk11 {
+  font-family: "Monaspace Neon Var", monospace !important;
+  font-variation-settings: "wght" 450 !important;
+  /* Heavier than body Neon (350) but lighter than Xenon keywords (500).
+     Function names are the verbs of code — prominent but not dominant. */
+}
+
+/* ════════════════════════════════════════════════════════
+  5. CLASS NAMES & TYPES → XENON (lighter than keywords)
+  Color in theme: #e3b341 (gold/amber)
+  Tokens: class Foo, interface Bar, type Baz, enum Qux
+  Xenon's serifs also work well for named types — but at lighter
+  weight than control keywords, they stay subordinate.
+   ════════════════════════════════════════════════════════ */
+.mtk12 {
+  font-family: "Monaspace Xenon Var", monospace !important;
+  font-variation-settings: "wght" 420 !important;
+    letter-spacing: -0.008em;
+  /* Lighter than keywords (500) — class names are nouns, not commands */
+}
+
+/* ════════════════════════════════════════════════════════
+6. NUMBERS & CONSTANTS → KRYPTONColor in theme: #ffa657 (orange)Tokens: 42, 3.14, 0xff, true, false, null, undefined, NaN, InfinityMechanical precision. These are values, not logic.
+   ════════════════════════════════════════════════════════ */
+.mtk9 {
+  font-family: "Monaspace Krypton Var", monospace !important;
+  font-variation-settings: "wght" 400 !important;
+  /* Regular weight — numbers should be crisp and neutral, not heavy */
+  letter-spacing: 0.005em;
+  /* Tiny positive tracking: Krypton's geometric digits benefit from
+     slightly more breathing room for legibility */
+}
+
+/* ════════════════════════════════════════════════════════
+7. OPERATORS → KRYPTON
+Color in theme: #c9d1d9 (near-white, same as plain text)
+   Tokens: + - * / % = === !== >= <= && || ?? ?. ...
+Structural scaffolding. Pure logic connectors.
+   ════════════════════════════════════════════════════════ */
+
+/* Soft keyword operators: delete, typeof, instanceof, in, of, void */
+.mtk7 {
+  font-family: "Monaspace Krypton Var", monospace !important;
+  font-variation-settings: "wght" 400 !important;
+}
+
+/* PHP-specific: -> :: operators */
+.mtk10 {
+  font-family: "Monaspace Krypton Var", monospace !important;
+  font-variation-settings: "wght" 400 !important;
+}
+
+/* ════════════════════════════════════════════════════════
+  8. PUNCTUATION → KRYPTON (lighter)
+  Color in theme: #6e7681 (dark gray)
+  Tokens: ; , . { } [ ] ( ) : < > / \
+  Scaffolding glyphs. Should not compete for attention.
+   ════════════════════════════════════════════════════════ */
+.mtk4 {
+  font-family: "Monaspace Krypton Var", monospace !important;
+  font-variation-settings: "wght" 300 !important;
+  /* Light weight — punctuation is structural, not semantic.
+     Krypton at 300 is present but recedes behind identifiers. */
+}
+
+/* ════════════════════════════════════════════════════════
+  9. IDENTIFIERS / VARIABLES → NEON (base)
+  Color in theme: #79c0ff (blue)
+  These are already Neon via settings.json fontFamily.
+  This rule only adds precise weight tuning.
+   ════════════════════════════════════════════════════════ */
+.mtk1 {
+  font-family: "Monaspace Neon Var", monospace !important;
+  font-variation-settings: "wght" 350 !important;
+  /* Match base editor.fontVariations — keeps identifiers consistent */
+}
+
+/* ════════════════════════════════════════════════════════
+  10. COPILOT / INLINE AI SUGGESTIONS → KRYPTON
+  Class names change between VS Code versions — check if ghost
+  text stops rendering in Krypton and update selectors accordingly.
+  Mechanical + low weight + reduced opacity = "machine wrote this"
+   ════════════════════════════════════════════════════════ */
+.ghost-text-decoration,
+.suggest-preview-text,
+.inline-completion-text,
+[class*="ghost-text"],
+[class*="inline-ghost"] {
+  font-family: "Monaspace Krypton Var", monospace !important;
+  font-variation-settings: "wght" 280 !important;
+  opacity: 0.6;
+  /* The combination of Krypton's mechanical geometry, ultra-light weight,
+    and reduced opacity makes AI suggestions immediately distinguishable
+     from your own code — without being distracting. */
+}
+
+/* ════════════════════════════════════════════════════════
+  11. INACTIVE CODE (disabled/greyed) → RADON
+  VS Code dims unreachable code with reduced opacity.
+  Adding Radon reinforces the "this doesn't run" signal.
+   ════════════════════════════════════════════════════════ */
+.squiggly-inline-unnecessary {
+  font-family: "Monaspace Radon Var", monospace !important;
+  font-variation-settings: "wght" 280 !important;
+  font-style: italic !important;
+}
+
+/* ════════════════════════════════════════════════════════
+  12. MINIMAP
+  The minimap renders its own pass. Fine-tuning opacity keeps
+  the minimap readable without Radon's strokes blooming at tiny size.
+   ════════════════════════════════════════════════════════ */
+.minimap .view-lines {
+  opacity: 0.88;
+}
+
+/* ════════════════════════════════════════════════════════
+  VERIFICATION SNIPPET
+  ════════════════════════════════════════════════════════
+  Open a .js or .php file and paste the following.
+  Each line should show a visually distinct font personality:
+
+  // RADON: handwritten, italic, lighter weight
+  // This is clearly a margin note, not code.
+
+  const greeting = "Hello world";
+  // ↑ const → XENON (slab serif)    "Hello world" → ARGON (humanist)
+
+  const count = 42;
+  // ↑ const → XENON                 42 → KRYPTON (mechanical)
+
+  function greet(name) {
+  // ↑ function → XENON              greet → NEON elevated (purple)
+
+    if (count > 0) {
+    // ↑ if → XENON                  > → KRYPTON
+
+      return `${greeting}, ${name}!`;
+      // ↑ return → XENON            string → ARGON
+    }
+  }
+
+  class UserService {
+  // ↑ class → XENON                 UserService → XENON lighter
+
+    static getById(id) {
+      return this.users[id] ?? null;
+      // ↑ null → KRYPTON            ?? → KRYPTON
+    }
+  }
+
+  // PHP example
+  // function → XENON, $variable → NEON, 'string' → ARGON
+  // -> operator → KRYPTON, class names → XENON lighter
+*/
+
+/* ════════════════════════════════════════════════════════
+  MTK CLASS QUICK REFERENCE — GITHUB DARK DEFAULT
+  (verify with DevTools if any assignment looks wrong)
+  ════════════════════════════════════════════════════════
+
+  .mtk1   #79c0ff  identifiers, variables, parameters   → NEON
+  .mtk3   #8b949e  comments                             → RADON
+  .mtk4   #6e7681  punctuation  ; , . { } [ ] ( )       → KRYPTON light
+  .mtk5   #ff7b72  keywords: if for while return class   → XENON
+  .mtk6   #a5d6ff  strings (quoted)                     → ARGON
+  .mtk7   #f47067  keyword-operators: typeof delete in   → KRYPTON
+  .mtk8   #ff7b72  storage: var let const function       → XENON
+                    (same color as .mtk5 in some contexts)
+  .mtk9   #ffa657  numbers, true/false/null              → KRYPTON
+  .mtk10  #c9d1d9  plain text, some operators            → NEON (default)
+  .mtk11  #d2a8ff  function names (declaration/call)     → NEON elevated
+  .mtk12  #e3b341  class names, type names               → XENON lighter
+  .mtk13  #7ee787  regex literals, template tag strings  → ARGON
+
+  If your DevTools shows different numbers than above:
+  1. Note the color shown on the span in DevTools
+  2. Find that color in the table above
+  3. Update the CSS rule to use your class number
+*/
