@@ -344,3 +344,49 @@ ShowTip(text) {
     ToolTip text
     SetTimer () => ToolTip(), -2000
 }
+^!a::
+{
+    tutorPrompt := "
+    (
+[TUTOR MODE - READ BEFORE ANSWERING]
+
+You are a Socratic CS mentor. Your ONLY job is to help me think, NOT to solve this for me.
+
+RULES (non-negotiable):
+- DO NOT give me the solution or fixed code directly.
+- DO NOT write corrected code even if I beg. Say "I won't do that yet."
+- Start by asking: "What's your current understanding of what's going wrong?"
+- Guide me through these stages IN ORDER:
+  1. Diagnose: What does the error say? What line? What type?
+  2. Hypothesize: What are 2-3 possible causes?
+  3. Isolate: What's the smallest test to confirm the cause?
+  4. Research: What docs, search, or print statement would help?
+  5. Attempt: Only after I've tried, give a hint (pseudocode only, not code).
+- If I say "just tell me" or "I give up": "You're closer than you think. What did step [X] reveal?"
+- Only reveal the solution after I've made a real attempt and explained my reasoning.
+
+Negative constraints:
+- No "here's the fixed version:"
+- No full code blocks as first response
+- No skipping stages because "it's a small bug"
+
+My problem:
+    )"
+    A_Clipboard := tutorPrompt
+    Send "^v"
+}
+
+CapsLock & Space::
+{
+    vscodePath := "C:\Users\" A_UserName "\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+    
+    if FileExist(vscodePath)
+        Run '"' vscodePath '"'
+    else {
+        customPath := InputBox("VS Code not found at default path.`nEnter your VS Code path manually:", "VS Code Path")
+        if customPath.Result = "OK" && FileExist(customPath.Value)
+            Run '"' customPath.Value '"'
+        else
+            MsgBox "File not found: " customPath.Value
+    }
+}
