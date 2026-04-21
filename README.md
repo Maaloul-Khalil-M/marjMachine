@@ -7,24 +7,6 @@ wakt inwili rajel taw insob fedora/ubuntu, for now i am win11 user
 	=> use  or [Winhance ](https://winhance.net/) or [autounattend.xml](https://schneegans.de/windows/unattend-generator/)
 	activate it and get office from massgravel
 
----
-[Firefox Shimmer](https://github.com/nuclearcodecat/shimmer/) + your exports
-  - [ ] Export and encrypt passwords as `.csv`
-  - [ ] Close Firefox completely
-  - [ ] Copy `AppData\Roaming\Mozilla\Firefox\Profiles\your-profile\` and encrypt it
-  - [ ] Export Sidebery backup as `.json` from Sidebery settings
----
-autohotkeyScripts (launcher.ahk)
-	- **Setup:** CapsLock disabled and used as a modifier key; single script instance
-	- **Navigation:** Caps + I/J/K/L for arrow keys; Shift + Caps for selection
-	- **Text Movement:** Caps + H/M for word navigation; Caps + U/O for line start/end; Shift for selection
-	- **Editing:** Caps + D for delete; Caps + Backspace for delete previous word
-	- **App Shortcuts:** Caps + Numpad1/2/3 for terminals; Caps + N/B/R/G for apps; Caps + F/C for browsers with DevTools
-	- **Music Menu:** Caps + V opens VLC playlist menu and controls playback
-	- **Project Manager:** Caps + P opens menu to start/stop projects; tracks processes and allows stopping all
-	- **Help:** Caps + / shows shortcut reference
-
----
 [powershell customization](powershell-linux-feel.md)
 	- scripts for lenvid, srttotxt, wifipassword
 	- [15 Lazygit Features In Under 15 Minutes - YouTube](https://www.youtube.com/watch?v=CPLdltN7wgE&t=10s)
@@ -53,6 +35,7 @@ vscode link github: settings.json, prettierrc, monaspace.css
 | [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve) | Video editing (MP4)                  |
 | [Audacity](https://www.audacityteam.org)                                    | Audio editing                        |
 | [ScreenToGIF](https://www.screentogif.com)                                  | GIF editing / screen recorder        |
+| [NAPS2](https://www.naps2.com/)                                             | scan pdf                             |
 ## image
 
 | Tool                                                     | Purpose                |
@@ -106,3 +89,22 @@ vscode link github: settings.json, prettierrc, monaspace.css
 |ShareX|Start/Stop screen recording (GIF)|—|
 |ShareX|Capture last region|Shift + Print Screen|
 # games and other
+
+---
+[Firefox Shimmer](https://github.com/nuclearcodecat/shimmer/) + your exports
+  - [ ] Export and encrypt passwords as `.csv`
+  - [ ] Close Firefox completely
+  - [ ] Copy `AppData\Roaming\Mozilla\Firefox\Profiles\your-profile\` and encrypt it
+  - [ ] Export Sidebery backup as `.json` from Sidebery settings
+---
+autohotkeyScripts (launcher.ahk)
+	- **Setup:** CapsLock disabled and used as a modifier key; single script instance
+	- **Navigation:** Caps + I/J/K/L for arrow keys; Shift + Caps for selection
+	- **Text Movement:** Caps + H/M for word navigation; Caps + U/O for line start/end; Shift for selection
+	- **Editing:** Caps + D for delete; Caps + Backspace for delete previous word
+	- **App Shortcuts:** Caps + Numpad1/2/3 for terminals; Caps + N/B/R/G for apps; Caps + F/C for browsers with DevTools
+	- **Music Menu:** Caps + V opens VLC playlist menu and controls playback
+	- **Project Manager:** Caps + P opens menu to start/stop projects; tracks processes and allows stopping all
+	- **Help:** Caps + / shows shortcut reference
+
+---
