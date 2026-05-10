@@ -975,3 +975,57 @@ QToolTip {
   background-color: rgba(100, 100, 130, 0.15);
 }
 */
+.vscode-widget .widget-container .icon {
+    color: #89b4fa;
+}
+
+.vscode-menu {
+    max-height: 500px;
+    min-width: 300px;
+}
+
+.vscode-menu .header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 15px;
+    font-weight: 400;
+    padding: 8px;
+    color: #cdd6f4;
+    background-color: rgba(17, 17, 27, 0.4);
+}
+
+.vscode-menu .contents {
+    background-color: rgba(17, 17, 27, 0.4);
+}
+
+.vscode-menu .contents .item {
+    min-height: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.vscode-menu .contents .item .title {
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.vscode-menu .contents .item .modified-date {
+    font-size: 11px;
+    margin-right: 5px;
+    color: #797e91;
+}
+
+.vscode-menu .contents .item .folder-icon {
+    font-size: 16px;
+    margin-left: 8px;
+    color: #f2cdcd;
+}
+
+.vscode-menu .contents .item .file-icon {
+    font-size: 16px;
+    margin-left: 8px;
+    color: #cba6f7;
+}
+
+.vscode-menu .contents .item:hover {
+    background-color: #45475a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+}
