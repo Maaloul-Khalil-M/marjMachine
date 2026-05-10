@@ -1,91 +1,133 @@
 watch_stylesheet: true
 watch_config: true
 debug: false
+
 komorebi:
   start_command: "komorebic start --whkd"
   stop_command: "komorebic stop --whkd"
   reload_command: "komorebic stop --whkd && komorebic start --whkd"
+
 bars:
   primary-bar:
     enabled: true
-    screens: ["*"]
+    screens:
+      - "*"
+
     class_name: "yasb-bar"
+
     alignment:
       position: "top"
       center: true
+
     animation:
       enabled: true
       duration: 1000
+
     blur_effect:
       enabled: true
       acrylic: false
+
     window_flags:
       always_on_top: true
       windows_app_bar: true
       hide_on_fullscreen: true
+
     dimensions:
       width: "100%"
       height: 32
+
     padding:
       top: 0
       left: 0
       bottom: 0
       right: 0
+
     widgets:
-      left: [
-          #"home",
-          "winlaunch_button",
-          
-          "weather","clock","todo",
-          #"komorebi_active_layout",
-          #"wallpapers",
-          "komorebi_workspaces"
-          
-          
-          #"apps"
-        ]
-      center: [
-        "active_window","time_period"
-      ]
+      left:
+        # - "home"
+        - "winlaunch_button"
+        - "weather"
+        - "clock"
+        - "vscode"
+        - "todo"
+        # - "komorebi_active_layout"
+        # - "wallpapers"
+        - "komorebi_workspaces"
+        # - "apps"
+
+      center:
+        - "active_window"
+        - "time_period"
+
       right:
-        [
-          
-          #"language",
-          "systray",
-          "taskbar","pomodoro",
-          "cpu","network",
-          #"memory",
-          #"notifications",
-          #"volume",
-          
-          
-          "battery",
-          "power_menu",
-        ]
+        # - "language"
+        - "systray"
+        - "taskbar"
+        - "volume"
+        - "pomodoro"
+        - "cpu"
+        - "network"
+        # - "memory"
+        # - "notifications"
+        - "battery"
+        - "power_menu"
+
 widgets:
+  vscode:
+    type: yasb.vscode.VSCodeWidget
+    options:
+      label: "<span>\udb82\ude1e</span>"
+      label_alt: "<span>\udb82\ude1e</span> recents"
+      menu_title: "<span style='font-weight:bold'>VScode</span> recents"
+      state_storage_path: "C:/Users/MarjPc/.vscode-shared/sharedStorage/state.vscdb"
+      max_field_size: 50
+      truncate_to_root_dir: true
+      hide_file_icon: true
+      max_number_of_folders: 10
+      max_number_of_files: 0
+      modified_date_format: "Modified: %Y-%m-%d %H:%M"
+      cli_command: code
+      menu:
+        blur: true
+        round_corners: true
+        round_corners_type: small
+        alignment: center
+        offset_top: 6
+
   time_period:
     type: "yasb.custom.CustomWidget"
+
     options:
-        # Mode 1: Just icon
-        label: "{data[icon]}"
-        # Mode 2: Icon + remaining time
-        label_alt: "{data[icon]} {data[remaining]}"
-        class_name: "time-period-widget"
-        tooltip: true
-        tooltip_label: "{data[name]} - {data[description]}\n{data[progressBar]} {data[progress]}%\nRemaining: {data[remaining]}\nNext: {data[nextIcon]} {data[nextName]}"
-        exec_options:
-          run_cmd: "node C:\\Users\\MarjPc\\.config\\yasb\\time_period.js"
-          run_interval: 60000  # Update every minute
-          return_format: "json"
-          use_shell: false
-        callbacks:
-          on_left: "toggle_label"  # Toggle between icon only and icon+time
-          #on_middle: "exec cmd /c notepad C:\\path\\to\\time_periods.json"  # Edit config
-          on_right: "toggle_label"  # Same as left click
-        animation:
-          enabled: true
-          type: "fadeInOut"
-          duration: 200
+      # Mode 1: Just icon
+      label: "{data[icon]}"
+
+      # Mode 2: Icon + remaining time
+      label_alt: "{data[icon]} {data[remaining]}"
+
+      class_name: "time-period-widget"
+
+      tooltip: true
+      tooltip_label: >
+        {data[name]} - {data[description]}
+        \n{data[progressBar]} {data[progress]}%
+        \nRemaining: {data[remaining]}
+        \nNext: {data[nextIcon]} {data[nextName]}
+
+      exec_options:
+        run_cmd: "node C:\\Users\\MarjPc\\.config\\yasb\\time_period.js"
+        run_interval: 60000 # Update every minute
+        return_format: "json"
+        use_shell: false
+
+      callbacks:
+        on_left: "toggle_label"
+        # on_middle: "exec cmd /c notepad C:\\path\\to\\time_periods.json"
+        on_right: "toggle_label"
+
+      animation:
+        enabled: true
+        type: "fadeInOut"
+        duration: 200
   wallpapers:
     type: "yasb.wallpapers.WallpapersWidget"
     options:
@@ -443,8 +485,8 @@ widgets:
   clock:
     type: "yasb.clock.ClockWidget"
     options:
-      #label: "<span>\uf017</span> {%H:%M}"
-      label: "{%d/%m \u2022 %H:%M}"
+      #label: "<span>\uf017 \u2022</span> {%H:%M}"
+      label: "{%d/%m %H:%M}"
       label_alt: "{%A, %d %B %Y %H:%M}"
       callbacks:
         on_left: "toggle_calendar"
@@ -644,7 +686,7 @@ widgets:
   winlaunch_button:
     type: "yasb.custom.CustomWidget"
     options:
-      label: "<span>あ\u2022</span>"
+      label: "<span>あ</span>"
       label_alt: "<span>𝛀</span>"
       class_name: "winlaunch-button"
       exec_options:
