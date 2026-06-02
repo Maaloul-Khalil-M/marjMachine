@@ -60,7 +60,7 @@ bars:
         - "time_period"
 
       right:
-        # - "language"
+        - "language"
         - "systray"
         - "taskbar"
         - "volume"
@@ -401,7 +401,13 @@ widgets:
         - '\u2588' # 80%+
       histogram_num_columns: 8
       callbacks:
-        on_right: "exec cmd /c Taskmgr"
+        on_left: "exec cmd /c Taskmgr"
+        on_right: "toggle_menu"
+      menu:
+        enabled: true
+        show_graph: true
+        show_graph_grid: true
+        graph_history_size: 60      
       container_padding:
         top: 0
         left: 12
