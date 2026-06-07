@@ -1,4 +1,2 @@
 "dotfiles and other/encrypt/"
-**/encrypt/node_modules/
-node_modules/**
-dotfiles and other\public\cli scripts\study-timer\node_modules
+**/node_modules/
