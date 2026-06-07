@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "getpl-cli"
+version = "1.0.0"
+description = "Single M3U8 Playlist Generator"
+dependencies = [
+    "typer>=0.9.0",
+]
+
+[project.scripts]
+getpl = "getPL:app"

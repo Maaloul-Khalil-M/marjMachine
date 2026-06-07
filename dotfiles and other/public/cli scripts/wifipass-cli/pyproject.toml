@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wifipass-cli"
+version = "1.0.0"
+description = "Show saved Wi-Fi passwords on Windows"
+dependencies = [
+    "typer>=0.9.0",
+    "qrcode[pil]>=7.4.2",
+]
+
+[project.scripts]
+wifipass = "wifipass:app"

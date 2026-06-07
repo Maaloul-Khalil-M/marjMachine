@@ -1,0 +1,23 @@
+{
+  "name": "study-timer",
+  "version": "1.0.0",
+  "description": "CLI study session tracker with goals, streaks, and review",
+  "main": "cli.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "yargs": "^18.0.0"
+  },
+  "bin": {
+    "study": "./cli.js"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.2"
+  }
+}
