@@ -1,6 +1,6 @@
-#Showcase
+# Showcase
 <p align="center">
-  <img src="./dotfiles and other/explorer_7K70h3hkOW.gif" width="500px"/>
+  <img src="./dotfiles and other/public/explorer_7K70h3hkOW.gif" width="500px"/>
 </p>
 
 > [!warning] If I Ever Need to Restore My PC
